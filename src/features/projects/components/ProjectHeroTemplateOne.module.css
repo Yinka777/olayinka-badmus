@@ -1,0 +1,307 @@
+.sequence {
+  --concrete: #9c9da4;
+  --ink: #111111;
+  --line: rgba(17, 17, 17, 0.28);
+
+  position: relative;
+  width: 100%;
+  height: 190svh;
+
+  color: var(--ink);
+  background: var(--concrete);
+}
+
+.stage {
+  position: sticky;
+  top: 5svh;
+
+  width: 90vw;
+  height: 90svh;
+  margin-inline: auto;
+
+  overflow: hidden;
+  background: var(--concrete);
+}
+
+/*
+ * The image is persistent throughout the experience.
+ * Scrolling only changes its crop and size.
+ */
+.imageFrame {
+  position: absolute;
+  inset: 0 0 12%;
+  z-index: 1;
+
+  margin: 0;
+  overflow: hidden;
+
+  transform-origin: center;
+  will-change: clip-path, transform, bottom;
+}
+
+.activeImage {
+  position: absolute;
+  inset: 0;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/*
+ * This button does nothing until the scroll transition
+ * has fully completed.
+ */
+.slideAdvance {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+  padding: 0;
+
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: e-resize;
+}
+
+.slideAdvance:disabled {
+  cursor: default;
+}
+
+/*
+ * Title and year persist after all other identity
+ * information has disappeared.
+ */
+.primaryIdentity {
+  position: absolute;
+  top: 7%;
+  left: 3%;
+  z-index: 6;
+
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.7rem, 1.4vw, 1.5rem);
+
+  width: max-content;
+
+  transform-origin: left top;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.title {
+  margin: 0;
+
+  font-size: clamp(2.5rem, 6vw, 8rem);
+  font-weight: 400;
+  line-height: 0.78;
+  letter-spacing: -0.075em;
+  white-space: nowrap;
+}
+
+.year {
+  margin: 0;
+
+  font-size: clamp(0.7rem, 0.9vw, 0.95rem);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/*
+ * Description and metadata occupy the open area
+ * of the initial L-shaped image.
+ */
+.identityDetails {
+  position: absolute;
+  top: 30%;
+  left: 3%;
+  z-index: 5;
+
+  width: min(34%, 34rem);
+
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.identityDetailsHidden {
+  opacity: 0 !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.description {
+  max-width: 31rem;
+  margin: 0;
+
+  font-size: clamp(0.95rem, 1.1vw, 1.2rem);
+  line-height: 1.45;
+}
+
+.metadata {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 2rem;
+
+  margin: clamp(1.5rem, 3vh, 3rem) 0 0;
+}
+
+.metadataItem {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+}
+
+.metadataItem dt {
+  font-size: 0.65rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.58;
+}
+
+.metadataItem dd {
+  margin: 0;
+
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.inlineList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.45rem;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inlineList li:not(:last-child)::after {
+  content: ",";
+}
+
+/*
+ * Initial state: below the image.
+ * Final state: overlaid at the top.
+ */
+.callout {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 4;
+
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.3fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem;
+
+  height: 12%;
+  padding-inline: clamp(1rem, 2vw, 2rem);
+
+  background: var(--concrete);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+
+  pointer-events: none;
+  will-change: top;
+}
+
+.calloutLabel {
+  margin: 0;
+
+  font-size: 0.63rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.calloutText {
+  max-width: 50rem;
+  margin: 0;
+
+  font-size: clamp(1rem, 1.5vw, 1.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.slideshowStatus {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 5;
+
+  display: flex;
+  gap: 1.5rem;
+
+  color: #ffffff;
+  font-size: 0.67rem;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+
+  pointer-events: none;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 900px) {
+  .stage {
+    width: 92vw;
+  }
+
+  .title {
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .identityDetails {
+    top: 27%;
+    width: 62%;
+  }
+
+  .callout {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .sequence {
+    height: 175svh;
+  }
+
+  .stage {
+    top: 3svh;
+    width: 94vw;
+    height: 94svh;
+  }
+
+  .identityDetails {
+    top: 25%;
+    width: 72%;
+  }
+
+  .metadata {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .description {
+    font-size: 0.88rem;
+  }
+
+  .metadataItem dd {
+    font-size: 0.72rem;
+  }
+
+  .callout {
+    height: 13%;
+  }
+
+  .calloutText {
+    font-size: 0.92rem;
+  }
+}

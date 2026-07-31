@@ -1,2 +1,112 @@
 @import "tailwindcss";
 
+.project-hero {
+  width: 100%;
+  padding: 1rem;
+}
+
+.project-hero__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
+  gap: 4rem;
+  align-items: end;
+  min-height: 58vh;
+  padding-block: 2rem 3rem;
+}
+
+.project-hero__title-group {
+  align-self: end;
+}
+
+.project-hero__eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-hero__title {
+  margin: 0;
+  font-size: clamp(4rem, 12vw, 12rem);
+  font-weight: 400;
+  line-height: 0.78;
+  letter-spacing: -0.07em;
+}
+
+.project-hero__summary {
+  display: grid;
+  gap: 2rem;
+  align-self: end;
+}
+
+.project-hero__description {
+  max-width: 36rem;
+  margin: 0;
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+  line-height: 1.35;
+}
+
+.project-hero__metadata {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  margin: 0;
+}
+
+.project-hero__metadata div {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.project-hero__metadata dt {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.project-hero__metadata dd {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.project-hero__media {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.project-hero__media img {
+  width: 100%;
+  height: auto;
+  min-height: 70vh;
+  object-fit: cover;
+}
+
+@media (max-width: 800px) {
+  .project-hero {
+    padding: 0.75rem;
+  }
+
+  .project-hero__intro {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    min-height: auto;
+    padding-block: 6rem 2rem;
+  }
+
+  .project-hero__title {
+    font-size: clamp(4rem, 22vw, 7rem);
+  }
+
+  .project-hero__metadata {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-hero__media img {
+    min-height: 55vh;
+  }
+}
