@@ -29,7 +29,7 @@
  */
 .imageFrame {
   position: absolute;
-  inset: 0 0 12%;
+  inset: 0 0 8%;
   z-index: 1;
 
   margin: 0;
@@ -199,7 +199,7 @@
   align-items: center;
   gap: 2rem;
 
-  height: 12%;
+  height: 8%;
   padding-inline: clamp(1rem, 2vw, 2rem);
 
   background: var(--concrete);

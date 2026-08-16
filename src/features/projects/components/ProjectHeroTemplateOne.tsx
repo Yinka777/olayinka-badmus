@@ -5,6 +5,7 @@ import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
+  useMotionTemplate,
   useScroll,
   useTransform,
 } from "motion/react";
@@ -35,7 +36,6 @@ type MetadataItemProps = {
   children: React.ReactNode;
 };
 
-const TRANSITION_END = 0.78;
 
 function MetadataItem({ label, children }: MetadataItemProps) {
   return (
@@ -77,33 +77,54 @@ export function ProjectHeroTemplateOne({
     offset: ["start start", "end end"],
   });
 
+  const HERO_START = 0;
+  const DETAILS_FADE_START = 0.3;
+  const DETAILS_FADE_END = 0.59;
+  const TRANSITION_END = 0.71;
+  const HERO_END = 1;
+
   /*
    * Image transition:
    * L-shaped crop → complete rectangle.
    */
-  const imageClipPath = useTransform(
+  const clipLeft = useTransform(
     scrollYProgress,
-    [0, TRANSITION_END],
-    [
-      "polygon(42% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 78%, 42% 78%)",
-      "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 0% 0%)",
-    ],
-    { clamp:  true },
+    [HERO_START, TRANSITION_END],
+    [41, 0],
+    { clamp: true },
   );
 
+  const clipNotchY = useTransform(
+    scrollYProgress,
+    [0, TRANSITION_END],
+    [71, 0],
+    { clamp: true },
+  );
+
+  const imageClipPath = useMotionTemplate`
+    polygon(
+      ${clipLeft}% 0%,
+      100% 0%,
+      100% 100%,
+      0% 100%,
+      0% ${clipNotchY}%,
+      ${clipLeft}% ${clipNotchY}%
+    )
+  `;
+
   /*
-   * Initially, the bottom 12% is reserved for the callout.
+   * Initially, the bottom 8% is reserved for the callout.
    * The image expands into that space during the transition.
    */
   const imageBottom = useTransform(
     scrollYProgress,
-    [0, TRANSITION_END],
-    ["12%", "0%"],
+    [HERO_START, TRANSITION_END],
+    ["8%", "0%"],
   );
 
   const imageScale = useTransform(
     scrollYProgress,
-    [0, TRANSITION_END],
+    [HERO_START, TRANSITION_END],
     [1.025, 1],
   );
 
@@ -113,15 +134,25 @@ export function ProjectHeroTemplateOne({
    */
   const detailsOpacity = useTransform(
     scrollYProgress,
-    [0, 0.3, 0.58],
-    [1, 1, 0],
+    [
+      HERO_START, 
+      DETAILS_FADE_START, 
+      DETAILS_FADE_END,
+      HERO_END
+    ],
+    [1, 1, 0, 0],
     { clamp: true },
   );
 
   const detailsY = useTransform(
     scrollYProgress,
-    [0.3, 0.58],
-    ["0rem", "-1.5rem"],
+    [
+      HERO_START, 
+      DETAILS_FADE_START, 
+      DETAILS_FADE_END,
+      HERO_END
+    ],
+    ["0rem", "0rem", "-1.5rem", "-1.5rem"],
     { clamp: true },
   );
 
@@ -130,25 +161,25 @@ export function ProjectHeroTemplateOne({
    */
   const titleRotate = useTransform(
     scrollYProgress,
-    [0, TRANSITION_END],
+    [HERO_START, TRANSITION_END],
     [0, -90],
   );
 
   const titleScale = useTransform(
     scrollYProgress,
-    [0, TRANSITION_END],
+    [HERO_START, TRANSITION_END],
     [1, 0.5],
   );
 
   const titleX = useTransform(
     scrollYProgress,
-    [0, TRANSITION_END],
+    [HERO_START, TRANSITION_END],
     ["0rem", "-1rem"],
   );
 
   const titleY = useTransform(
     scrollYProgress,
-    [0, TRANSITION_END],
+    [HERO_START, TRANSITION_END],
     ["0svh", "74svh"],
   );
 
@@ -158,7 +189,7 @@ export function ProjectHeroTemplateOne({
    */
   const calloutTop = useTransform(
     scrollYProgress,
-    [0, TRANSITION_END],
+    [HERO_START, TRANSITION_END],
     ["88%", "0%"],
   );
 
@@ -181,16 +212,12 @@ export function ProjectHeroTemplateOne({
      * Only restore the introduction when the visitor returns
      * almost completely to the beginning.
      */
-    if (latest <= 0.05 && introHiddenRef.current) {
+    if (latest <= 0.95 && introHiddenRef.current) {
       introHiddenRef.current = false;
       setIsIntroHidden(false);
       setIsSlideshowReady(false);
       setCurrentSlide(0);
     }
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log("scroll progress:", latest);
   });
 
   function showNextSlide() {
@@ -203,6 +230,9 @@ export function ProjectHeroTemplateOne({
     });
   }
 
+  const FULL_IMAGE_CLIP =
+  "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 0% 0%)";
+
   return (
     <section
       ref={sequenceRef}
@@ -213,9 +243,17 @@ export function ProjectHeroTemplateOne({
         <motion.figure
           className={styles.imageFrame}
           style={{
-            clipPath: imageClipPath,
-            bottom: imageBottom,
-            scale: imageScale,
+            clipPath: isSlideshowReady
+              ? FULL_IMAGE_CLIP
+              : imageClipPath,
+
+            bottom: isSlideshowReady
+              ? "0%"
+              : imageBottom,
+
+            scale: isSlideshowReady
+              ? 1
+              : imageScale,
           }}
         >
           <AnimatePresence initial={false} mode="sync">
