@@ -1,0 +1,233 @@
+.body {
+  --concrete: #9c9da4;
+  --ink: #111111;
+
+  width: 100%;
+  min-height: 100svh;
+
+  color: var(--ink);
+  background: var(--concrete);
+}
+
+.carouselSection {
+  position: relative;
+
+  height: 250svh;
+
+  background: var(--concrete);
+}
+
+.carouselStage {
+  position: sticky;
+  top: 5svh;
+
+  display: grid;
+  place-items: center;
+
+  width: 90vw;
+  height: 90svh;
+  margin-inline: auto;
+
+  overflow: hidden;
+}
+
+.carouselScene {
+  position: relative;
+
+  width: 100%;
+  height: 78%;
+
+  perspective: 1600px;
+  perspective-origin: 50% 45%;
+
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.carouselScene:active {
+  cursor: grabbing;
+}
+
+.carouselRing {
+  position: absolute;
+  inset: 0;
+
+  transform-style: preserve-3d;
+
+  will-change: transform;
+}
+
+.carouselItem {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: clamp(12rem, 19vw, 22rem);
+  aspect-ratio: 0.75;
+
+  margin: 0;
+
+  transform-style: preserve-3d;
+  transform-origin: center center;
+
+  overflow: hidden;
+
+  translate: -50% -50%;
+
+  will-change: transform;
+}
+
+.carouselItemButton {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  padding: 0;
+
+  appearance: none;
+  border: 0;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.carouselItemButton:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.carouselControls {
+  position: absolute;
+
+  right: 0;
+  bottom: 1rem;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1.5rem;
+}
+
+.carouselControls button {
+  display: grid;
+  place-items: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  padding: 0;
+
+  color: var(--ink);
+  background: transparent;
+
+  border: 1px solid rgba(17, 17, 17, 0.3);
+  border-radius: 999px;
+
+  cursor: pointer;
+}
+
+.carouselControls span {
+  font-size: 0.7rem;
+
+  letter-spacing: 0.08em;
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  display: grid;
+  grid-template-columns:
+    minmax(15rem, 0.6fr)
+    minmax(0, 1.4fr);
+
+  gap: clamp(4rem, 8vw, 10rem);
+
+  width: 90vw;
+  margin-inline: auto;
+
+  padding:
+    8svh
+    0
+    14svh;
+}
+
+.meta {
+  display: grid;
+  align-self: end;
+  gap: 1.5rem;
+}
+
+.meta p {
+  margin: 0;
+
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.label {
+  margin-bottom: 0.35rem !important;
+
+  font-size: 0.62rem !important;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  opacity: 0.55;
+}
+
+.description {
+  align-self: center;
+}
+
+.description p {
+  max-width: 55rem;
+  margin: 0;
+
+  font-size: clamp(2rem, 3.5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+@media (max-width: 900px) {
+  .mediaRow {
+    overflow-x: auto;
+  }
+
+  .info {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .mediaRow {
+    padding-inline: 3vw;
+  }
+
+  .mediaItem {
+    width: 38vw;
+  }
+
+  .info {
+    width: 94vw;
+  }
+
+  .description p {
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
+  }
+}
