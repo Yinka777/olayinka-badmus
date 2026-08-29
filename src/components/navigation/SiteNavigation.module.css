@@ -1,0 +1,147 @@
+.navigation {
+  position: fixed;
+  top: clamp(1rem, 2.5vh, 2rem);
+  left: 50%;
+  z-index: 100;
+
+  /*
+   * Use the independent translate property so we're
+   * not tying positioning to transform animations.
+   */
+  translate: -50% 0;
+
+  width: max-content;
+
+  color: #111111;
+}
+
+/* Entire visible line stays centered */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0;
+
+  width: max-content;
+}
+
+/* ---------------------------
+   TITLE
+---------------------------- */
+
+.titleGroup {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.siteTitle {
+  display: block;
+
+  color: inherit;
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ---------------------------
+   SUBTITLE
+---------------------------- */
+
+.subtitle {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 50%;
+
+  translate: -50% 0;
+
+  width: max-content;
+
+  font-size: 0.68rem;
+  line-height: 1.2;
+
+  white-space: pre-line;
+  text-align: center;
+
+  opacity: 0;
+
+  transform: translateY(-0.2rem);
+
+  pointer-events: none;
+
+  transition:
+    opacity 250ms ease,
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------
+   LINKS
+---------------------------- */
+
+.links {
+  display: flex;
+  align-items: center;
+
+  gap: clamp(0.75rem, 1.4vw, 1.5rem);
+
+  /*
+   * Closed state.
+   *
+   * Since this takes up almost no horizontal
+   * space initially, the site title is centered.
+   */
+  max-width: 0;
+  margin-left: 0;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  white-space: nowrap;
+
+  transition:
+    max-width 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin-left 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 250ms ease;
+}
+
+.links a {
+  color: inherit;
+  text-decoration: none;
+
+  font-size: 0.75rem;
+  line-height: 1;
+
+  text-transform: lowercase;
+
+  opacity: 0.7;
+
+  transition: opacity 180ms ease;
+}
+
+.links a:hover,
+.links a:focus-visible {
+  opacity: 1;
+}
+
+/* ---------------------------
+   OPEN STATE
+---------------------------- */
+
+.navigation:hover .links,
+.navigation:focus-within .links {
+  max-width: 18rem;
+  margin-left: clamp(1rem, 2vw, 2rem);
+
+  opacity: 1;
+}
+
+.navigation:hover .subtitle,
+.navigation:focus-within .subtitle {
+  opacity: 1;
+
+  transform: translateY(0);
+}
