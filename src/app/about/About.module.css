@@ -1,0 +1,98 @@
+.page {
+  --concrete: #9c9da4;
+  --ink: #111111;
+
+  position: relative;
+
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  color: var(--ink);
+  background: var(--concrete);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 90vw;
+  min-height: 100svh;
+
+  margin-inline: auto;
+
+  /*
+   * Lets the fixed navigation breathe.
+   */
+  padding:
+    clamp(8rem, 17svh, 12rem)
+    0
+    6svh;
+
+  pointer-events: none;
+}
+
+.about {
+  width: min(38rem, 47vw);
+
+  pointer-events: auto;
+}
+
+.about p {
+  margin: 0;
+
+  font-size: clamp(
+    0.8rem,
+    1vw,
+    1.25rem
+  );
+
+  color: beige;
+
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.enquiries {
+  width: min(25rem, 35vw);
+
+  margin-top: auto;
+
+  pointer-events: auto;
+}
+
+.enquiries p {
+  margin:
+    0
+    0
+    0.6rem;
+
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.enquiries a {
+  color: inherit;
+
+  font-size: 0.8rem;
+
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media (max-width: 700px) {
+  .content {
+    width: 94vw;
+  }
+
+  .about {
+    width: 85%;
+  }
+
+  .enquiries {
+    width: 80%;
+  }
+}
