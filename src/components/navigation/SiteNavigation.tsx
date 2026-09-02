@@ -3,6 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import { TransitionLink } from "@/components/transitions/TransitionLink";
+
+import {
+  homeProjects,
+} from "@/features/home/data/homeProjects";
+
 import styles from "./SiteNavigation.module.css";
 
 type SiteNavigationProps = {
@@ -16,20 +28,87 @@ export function SiteNavigation({
 }: SiteNavigationProps) {
   const pathname = usePathname();
 
+  const [isOpen, setIsOpen] =
+    useState(false);
+
+  const navigationRef =
+    useRef<HTMLElement>(null);
+
   const isAboutPage =
     pathname === "/about" ||
     pathname.startsWith("/about/");
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    function handlePointerDown(
+      event: PointerEvent,
+    ) {
+      if (!isOpen) return;
+
+      const navigation =
+        navigationRef.current;
+
+      if (
+        navigation &&
+        !navigation.contains(
+          event.target as Node,
+        )
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener(
+      "pointerdown",
+      handlePointerDown,
+    );
+
+    return () => {
+      document.removeEventListener(
+        "pointerdown",
+        handlePointerDown,
+      );
+    };
+  }, [isOpen]);
+
+  function handleTitleClick(
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) {
+
+    const isTouchLike =
+      window.matchMedia(
+        "(hover: none), (pointer: coarse)",
+      ).matches;
+
+    if (!isTouchLike) {
+      return;
+    }
+
+    if (!isOpen) {
+      event.preventDefault();
+      setIsOpen(true);
+    }
+  }
+
   return (
-    <header className={styles.navigation}>
+    <header 
+      ref={navigationRef}
+      className={`${styles.navigation} ${
+        isOpen ? styles.open : ""
+      }`}
+    >
       <div className={styles.row}>
         <div className={styles.titleGroup}>
-          <Link
+          <TransitionLink
             href="/"
             className={styles.siteTitle}
+            onClick={handleTitleClick}
           >
             {title}
-          </Link>
+          </TransitionLink>
 
           <span className={styles.subtitle}>
             {subtitle}
@@ -41,22 +120,22 @@ export function SiteNavigation({
           aria-label="Main navigation"
         >
           {isAboutPage ? (
-            <Link href="/">
+            <TransitionLink href="/">
               Projects
-            </Link>
+            </TransitionLink>
           ) : (
-            <Link href="/about">
+            <TransitionLink href="/about">
               About
-            </Link>
+            </TransitionLink>
           )}
 
           <a href="mailto:contact@olayinka-badmus.com">
             Contact
           </a>
 
-          <Link href="/index">
+          <TransitionLink href="/index">
             Index
-          </Link>
+          </TransitionLink>
         </nav>
       </div>
     </header>

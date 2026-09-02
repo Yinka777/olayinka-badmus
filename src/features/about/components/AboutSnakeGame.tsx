@@ -55,6 +55,13 @@ export function AboutSnakeGame() {
   const columnsRef = useRef(0);
   const rowsRef = useRef(0);
 
+  const touchStartRef = useRef<Point | null>(
+    null,
+  );
+
+  const [isTouchDevice, setIsTouchDevice] =
+    useState(false);
+
   const [status, setStatus] =
     useState<
       "idle" | "playing" | "gameover"
@@ -404,6 +411,114 @@ export function AboutSnakeGame() {
     ]);
 
   /* -----------------------------
+      POINTER HANDLER FUNCTIONS
+  ------------------------------ */
+
+  function handlePointerDown(
+    event: React.PointerEvent,
+  ) {
+    if (
+      !isTouchDevice ||
+      statusRef.current !== "playing"
+    ) {
+      return;
+    }
+
+    touchStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+    };
+  }
+
+  function handlePointerUp(
+    event: React.PointerEvent,
+  ) {
+    if (
+      !isTouchDevice ||
+      statusRef.current !== "playing" ||
+      !touchStartRef.current
+    ) {
+      return;
+    }
+
+    const deltaX =
+      event.clientX -
+      touchStartRef.current.x;
+
+    const deltaY =
+      event.clientY -
+      touchStartRef.current.y;
+
+    touchStartRef.current = null;
+
+    /*
+    * Ignore accidental tiny movements.
+    */
+    const SWIPE_THRESHOLD = 20;
+
+    if (
+      Math.abs(deltaX) <
+        SWIPE_THRESHOLD &&
+      Math.abs(deltaY) <
+        SWIPE_THRESHOLD
+    ) {
+      return;
+    }
+
+    const current =
+      directionRef.current;
+
+    /*
+    * Horizontal swipe
+    */
+    if (
+      Math.abs(deltaX) >
+      Math.abs(deltaY)
+    ) {
+      if (
+        deltaX > 0 &&
+        current.x !== -1
+      ) {
+        nextDirectionRef.current = {
+          x: 1,
+          y: 0,
+        };
+      } else if (
+        deltaX < 0 &&
+        current.x !== 1
+      ) {
+        nextDirectionRef.current = {
+          x: -1,
+          y: 0,
+        };
+      }
+    }
+
+    /*
+    * Vertical swipe
+    */
+    else {
+      if (
+        deltaY > 0 &&
+        current.y !== -1
+      ) {
+        nextDirectionRef.current = {
+          x: 0,
+          y: 1,
+        };
+      } else if (
+        deltaY < 0 &&
+        current.y !== 1
+      ) {
+        nextDirectionRef.current = {
+          x: 0,
+          y: -1,
+        };
+      }
+    }
+  }
+
+  /* -----------------------------
      RESIZE CANVAS
   ------------------------------ */
 
@@ -488,6 +603,13 @@ export function AboutSnakeGame() {
   /* -----------------------------
      KEYBOARD CONTROLS
   ------------------------------ */
+  useEffect(() => {
+    setIsTouchDevice(
+      window.matchMedia(
+        "(hover: none), (pointer: coarse)",
+      ).matches,
+    );
+  }, []);
 
   useEffect(() => {
     function handleKeyDown(
@@ -609,7 +731,13 @@ export function AboutSnakeGame() {
   return (
     <div
       ref={containerRef}
-      className={styles.game}
+      className={`${styles.game} ${
+        status === "playing"
+          ? styles.gamePlaying
+          : ""
+      }`}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
       aria-hidden="true"
     >
       <canvas
@@ -621,9 +749,15 @@ export function AboutSnakeGame() {
         className={styles.gameStatus}
       >
         {status === "idle" && (
-          <span>
-            Space to play. Controls - Arrow keys/WASD 
-          </span>
+          <button
+            type="button"
+            className={styles.startButton}
+            onClick={startGame}
+          >
+            {isTouchDevice
+              ? "Tap to play"
+              : "Space to play"}
+          </button>
         )}
 
         {status ===

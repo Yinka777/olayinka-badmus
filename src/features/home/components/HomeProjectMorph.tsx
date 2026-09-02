@@ -12,6 +12,8 @@ import type { HomeProject } from "../data/homeProjects";
 
 import styles from "./HomeProjectMorph.module.css";
 
+import { TransitionLink } from "@/components/transitions/TransitionLink";
+
 type HomeProjectMorphProps = {
   projects: HomeProject[];
 };
@@ -302,7 +304,7 @@ export function HomeProjectMorph({
                     delay: index * 0.05,
                   }}
                 >
-                  <Link
+                  <TransitionLink
                     href={subproject.href}
                     className={
                       styles.subprojectLink
@@ -336,7 +338,7 @@ export function HomeProjectMorph({
                     >
                       {subproject.title}
                     </span>
-                  </Link>
+                  </TransitionLink>
                 </motion.div>
               ),
             )}

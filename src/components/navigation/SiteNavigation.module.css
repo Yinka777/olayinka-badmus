@@ -132,7 +132,8 @@
 ---------------------------- */
 
 .navigation:hover .links,
-.navigation:focus-within .links {
+.navigation:focus-within .links, 
+.navigation.open .links {
   max-width: 18rem;
   margin-left: clamp(1rem, 2vw, 2rem);
 
@@ -140,7 +141,8 @@
 }
 
 .navigation:hover .subtitle,
-.navigation:focus-within .subtitle {
+.navigation:focus-within .subtitle,
+.navigation.open .subtitle {
   opacity: 1;
 
   transform: translateY(0);

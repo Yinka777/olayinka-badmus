@@ -220,7 +220,7 @@ export const homeProjects: HomeProject[] = [
     subprojects: [
       {
         title: "Poster Design",
-        href: "/work/posters",
+        href: "/work/graphic-design",
 
         image: {
           src: "/images/home/posters-thumb.png",

@@ -1,0 +1,46 @@
+.polygonTransition,
+.curtainTransition {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  background: #9c9da4;
+
+  pointer-events: all;
+}
+
+.polygonTransition {
+  will-change: clip-path;
+}
+
+.curtainTransition {
+  will-change: transform;
+}
+
+.expandTransition {
+  position: fixed;
+
+  z-index: 1000;
+
+  overflow: hidden;
+
+  pointer-events: all;
+
+  background: #9c9da4;
+
+  will-change:
+    left,
+    top,
+    width,
+    height;
+}
+
+.expandImage {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { PageTransitionProvider } from "@/components/transitions/PageTransitionProvider";
 import { SiteNavigation } from "@/components/navigation/SiteNavigation";
 
 const geistSans = Geist({
@@ -20,21 +21,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <SiteNavigation
-          title="olayinka"
-          subtitle={"ola-yimika\nwealth - surrounds me"}
-        />
+        <PageTransitionProvider>
+          <SiteNavigation
+            title="olayinka"
+            subtitle={"ola-yimika\nwealth - surrounds me"}
+          />
 
-        {children}
+
+          {children}
+        </PageTransitionProvider>
       </body>
     </html>
   );

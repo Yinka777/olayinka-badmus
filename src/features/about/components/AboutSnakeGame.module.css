@@ -8,6 +8,20 @@
   pointer-events: none;
 }
 
+.gamePlaying {
+  pointer-events: auto;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .gamePlaying {
+    /*
+     * While playing, swipes belong to Snake,
+     * not page scrolling.
+     */
+    touch-action: none;
+  }
+}
+
 .canvas {
   display: block;
 
