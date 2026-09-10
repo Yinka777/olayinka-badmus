@@ -17,6 +17,7 @@ type ProjectImage = {
   alt: string;
   caption?: string;
   objectPosition?: string;
+  scale?: number;
 };
 
 type ProjectHeroTemplateOneProps = {
@@ -83,10 +84,6 @@ export function ProjectHeroTemplateOne({
   const TRANSITION_END = 0.71;
   const HERO_END = 1;
 
-  /*
-   * Image transition:
-   * L-shaped crop → complete rectangle.
-   */
   const clipLeft = useTransform(
     scrollYProgress,
     [HERO_START, TRANSITION_END],
@@ -112,10 +109,6 @@ export function ProjectHeroTemplateOne({
     )
   `;
 
-  /*
-   * Initially, the bottom 8% is reserved for the callout.
-   * The image expands into that space during the transition.
-   */
   const imageBottom = useTransform(
     scrollYProgress,
     [HERO_START, TRANSITION_END],
@@ -128,10 +121,6 @@ export function ProjectHeroTemplateOne({
     [1.025, 1],
   );
 
-  /*
-   * Description and project metadata disappear before
-   * the transition reaches its final state.
-   */
   const detailsOpacity = useTransform(
     scrollYProgress,
     [
@@ -156,9 +145,6 @@ export function ProjectHeroTemplateOne({
     { clamp: true },
   );
 
-  /*
-   * Title and year remain, becoming a small vertical marker.
-   */
   const titleRotate = useTransform(
     scrollYProgress,
     [HERO_START, TRANSITION_END],
@@ -183,35 +169,19 @@ export function ProjectHeroTemplateOne({
     ["0svh", "74svh"],
   );
 
-  /*
-   * The callout begins below the cropped image
-   * and finishes as a strip at the top.
-   */
   const calloutTop = useTransform(
     scrollYProgress,
     [HERO_START, TRANSITION_END],
     ["88%", "0%"],
   );
 
-  /*
-   * Scroll controls only the transition.
-   * Once completed, clicking controls the slideshow.
-   */
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    /*
-     * Once the transition completes, lock the introductory
-     * content in its hidden state.
-     */
     if (latest >= TRANSITION_END && !introHiddenRef.current) {
       introHiddenRef.current = true;
       setIsIntroHidden(true);
       setIsSlideshowReady(true);
     }
 
-    /*
-     * Only restore the introduction when the visitor returns
-     * almost completely to the beginning.
-     */
     if (latest <= 0.95 && introHiddenRef.current) {
       introHiddenRef.current = false;
       setIsIntroHidden(false);
@@ -278,6 +248,8 @@ export function ProjectHeroTemplateOne({
                 style={{
                   objectPosition:
                     activeImage.objectPosition ?? "center",
+                  
+                  transform: `scale(${activeImage.scale ?? 1})`,
                 }}
               />
             </motion.div>

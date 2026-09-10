@@ -220,7 +220,7 @@ export const homeProjects: HomeProject[] = [
     subprojects: [
       {
         title: "Poster Design",
-        href: "/work/graphic-design",
+        href: "/work/poster-design",
 
         image: {
           src: "/images/home/posters-thumb.png",
@@ -239,7 +239,7 @@ export const homeProjects: HomeProject[] = [
         href: "/work/photography",
 
         image: {
-          src: "/images/home/photography-thumb.jpg",
+          src: "/images/home/photography-thumb.webp",
           alt: "Photography",
         },
 

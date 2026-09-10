@@ -1,0 +1,695 @@
+.gallery {
+  --concrete: #9c9da4;
+  --ink: #111111;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  align-items: center;
+
+  column-gap:
+    clamp(2rem, 5vw, 7rem);
+
+  row-gap:
+    clamp(4rem, 9vw, 10rem);
+
+  width: 90vw;
+  margin-inline: auto;
+
+  padding:
+    clamp(8rem, 15svh, 14rem)
+    0
+    clamp(10rem, 18svh, 18rem);
+
+  background: var(--concrete);
+}
+
+
+/* -----------------------------
+   GALLERY ITEM
+------------------------------ */
+
+.galleryItem {
+  flex: 0 0 auto;
+
+  margin: 0;
+}
+
+
+/* -----------------------------
+   FRAME SIZES
+------------------------------ */
+
+.size_small {
+  width:
+    clamp(
+      8rem,
+      13vw,
+      12rem
+    );
+}
+
+.size_medium {
+  width:
+    clamp(
+      12rem,
+      20vw,
+      19rem
+    );
+}
+
+.size_large {
+  width:
+    clamp(
+      17rem,
+      28vw,
+      27rem
+    );
+}
+
+
+/* -----------------------------
+   CLICKABLE FRAME
+------------------------------ */
+
+.frameButton {
+  display: block;
+
+  width: 100%;
+  padding: 0;
+
+  color: inherit;
+  background: transparent;
+
+  border: 0;
+
+  cursor: zoom-in;
+}
+
+.frameButton:focus-visible {
+  outline:
+    1px solid var(--ink);
+
+  outline-offset:
+    0.75rem;
+}
+
+
+/* -----------------------------
+   BASE FRAME
+------------------------------ */
+
+.frame {
+  position: relative;
+
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+.imageArea {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+
+/* -----------------------------
+   01 — THIN
+------------------------------ */
+
+.frame_thin {
+  padding: 0.35rem;
+
+  background:
+    var(--ink);
+}
+
+
+/* -----------------------------
+   02 — MATTED
+------------------------------ */
+
+.frame_mat {
+  padding:
+    clamp(
+      1rem,
+      2vw,
+      2rem
+    );
+
+  background:
+    #dedbd0;
+
+  border:
+    0.3rem solid
+    var(--ink);
+}
+
+
+/* -----------------------------
+   03 — DOUBLE
+------------------------------ */
+
+.frame_double {
+  padding: 0.65rem;
+
+  background:
+    var(--concrete);
+
+  border:
+    0.45rem double
+    var(--ink);
+}
+
+.frame_double::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0.3rem;
+
+  border:
+    1px solid
+    rgba(
+      17,
+      17,
+      17,
+      0.55
+    );
+
+  pointer-events: none;
+}
+
+
+/* -----------------------------
+   04 — ORNATE
+------------------------------ */
+
+.frame_ornate {
+  padding:
+    clamp(
+      0.75rem,
+      1.5vw,
+      1.25rem
+    );
+
+  background:
+    #76634d;
+
+  border:
+    0.25rem solid
+    var(--ink);
+
+  box-shadow:
+    inset 0 0 0
+      0.2rem #a28b68,
+    inset 0 0 0
+      0.45rem #4c4033;
+}
+
+.frame_ornate::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0.35rem;
+
+  border:
+    1px solid
+    rgba(
+      17,
+      17,
+      17,
+      0.75
+    );
+
+  pointer-events: none;
+}
+
+
+/* -----------------------------
+   05 — CARVED GILT / BAROQUE
+------------------------------ */
+
+.frame_baroque {
+  position: relative;
+
+  padding:
+    clamp(
+      0.95rem,
+      1.8vw,
+      1.6rem
+    );
+
+  /*
+   * Corner highlights +
+   * layered gold moulding.
+   */
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      #f3dc83
+        0 0.3rem,
+      #a87c22
+        0.34rem 0.6rem,
+      transparent
+        0.64rem
+    ),
+
+    radial-gradient(
+      circle at 100% 0%,
+      #f3dc83
+        0 0.3rem,
+      #a87c22
+        0.34rem 0.6rem,
+      transparent
+        0.64rem
+    ),
+
+    radial-gradient(
+      circle at 0% 100%,
+      #f3dc83
+        0 0.3rem,
+      #a87c22
+        0.34rem 0.6rem,
+      transparent
+        0.64rem
+    ),
+
+    radial-gradient(
+      circle at 100% 100%,
+      #f3dc83
+        0 0.3rem,
+      #a87c22
+        0.34rem 0.6rem,
+      transparent
+        0.64rem
+    ),
+
+    linear-gradient(
+      135deg,
+      #4a340d 0%,
+      #8c6518 9%,
+      #d6ad3e 18%,
+      #f2dc88 29%,
+      #aa7d24 39%,
+      #5b4214 50%,
+      #d4aa39 62%,
+      #f0d679 75%,
+      #8b6418 88%,
+      #49320b 100%
+    );
+
+  border:
+    0.35rem solid
+    #49320b;
+
+  box-shadow:
+    inset 0 0 0
+      0.14rem #f0d878,
+
+    inset 0 0 0
+      0.32rem #876018,
+
+    inset 0 0 0
+      0.55rem #d5af42,
+
+    inset 0 0 0
+      0.7rem #58400f;
+}
+
+
+/*
+ * Raised inner moulding.
+ */
+
+.frame_baroque::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0.4rem;
+
+  z-index: 2;
+
+  border:
+    0.18rem ridge
+    #d8b54b;
+
+  box-shadow:
+    inset 0 0 0
+      1px
+      rgba(
+        55,
+        38,
+        6,
+        0.75
+      );
+
+  pointer-events: none;
+}
+
+
+/*
+ * Fine carved line around
+ * the image opening.
+ */
+
+.frame_baroque::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0.75rem;
+
+  z-index: 2;
+
+  border:
+    1px solid
+    rgba(
+      71,
+      48,
+      8,
+      0.8
+    );
+
+  box-shadow:
+    0 0 0
+      0.12rem
+      rgba(
+        235,
+        204,
+        104,
+        0.68
+      );
+
+  pointer-events: none;
+}
+
+
+/* -----------------------------
+   LIGHTBOX
+------------------------------ */
+
+.lightbox {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1200;
+
+  display: grid;
+
+  place-items: center;
+
+  padding:
+    clamp(
+      1rem,
+      3vw,
+      3rem
+    );
+
+  background:
+    rgba(
+      156,
+      157,
+      164,
+      0.96
+    );
+
+  cursor: zoom-out;
+
+  overscroll-behavior:
+    contain;
+}
+
+.expandedImage {
+  position: relative;
+
+  width:
+    min(
+      92vw,
+      100rem
+    );
+
+  height: 88svh;
+
+  cursor: default;
+}
+
+.expandedMedia {
+  object-fit: contain;
+}
+
+
+/* -----------------------------
+   LIGHTBOX CLOSE
+------------------------------ */
+
+.closeButton {
+  position: absolute;
+
+  top:
+    clamp(
+      1rem,
+      2vw,
+      2rem
+    );
+
+  right:
+    clamp(
+      1rem,
+      2vw,
+      2rem
+    );
+
+  z-index: 4;
+
+  padding: 0;
+
+  color: var(--ink);
+  background: transparent;
+
+  border: 0;
+
+  font: inherit;
+
+  font-size: 0.7rem;
+  line-height: 1;
+
+  letter-spacing:
+    0.08em;
+
+  text-transform:
+    uppercase;
+
+  cursor: pointer;
+}
+
+
+/* -----------------------------
+   LIGHTBOX NAVIGATION
+------------------------------ */
+
+.navButton {
+  position: absolute;
+
+  top: 50%;
+
+  z-index: 4;
+
+  display: grid;
+
+  place-items: center;
+
+  width: 3rem;
+  height: 3rem;
+
+  padding: 0;
+
+  translate: 0 -50%;
+
+  color: var(--ink);
+  background: transparent;
+
+  border: 0;
+
+  font: inherit;
+  font-size: 1.25rem;
+
+  cursor: pointer;
+
+  opacity: 0.55;
+
+  transition:
+    opacity 180ms ease,
+    transform 220ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+}
+
+.previousButton {
+  left:
+    clamp(
+      1rem,
+      2.5vw,
+      3rem
+    );
+}
+
+.nextButton {
+  right:
+    clamp(
+      1rem,
+      2.5vw,
+      3rem
+    );
+}
+
+.navButton:hover {
+  opacity: 1;
+}
+
+.previousButton:hover {
+  transform:
+    translateX(-0.2rem);
+}
+
+.nextButton:hover {
+  transform:
+    translateX(0.2rem);
+}
+
+.navButton:focus-visible,
+.closeButton:focus-visible {
+  outline:
+    1px solid
+    currentColor;
+
+  outline-offset:
+    0.25rem;
+}
+
+
+/* -----------------------------
+   TABLET
+------------------------------ */
+
+@media (
+  max-width: 900px
+) {
+  .gallery {
+    width: 92vw;
+
+    column-gap:
+      clamp(
+        1.5rem,
+        4vw,
+        3rem
+      );
+
+    row-gap:
+      clamp(
+        4rem,
+        10vw,
+        7rem
+      );
+
+    padding:
+      8rem
+      0
+      10rem;
+  }
+
+  .size_small {
+    width:
+      clamp(
+        7rem,
+        18vw,
+        10rem
+      );
+  }
+
+  .size_medium {
+    width:
+      clamp(
+        10rem,
+        27vw,
+        15rem
+      );
+  }
+
+  .size_large {
+    width:
+      clamp(
+        14rem,
+        38vw,
+        21rem
+      );
+  }
+}
+
+
+/* -----------------------------
+   MOBILE
+------------------------------ */
+
+@media (
+  max-width: 700px
+) {
+  .gallery {
+    width: 94vw;
+
+    column-gap: 6vw;
+    row-gap: 14vw;
+
+    padding:
+      6rem
+      0
+      8rem;
+  }
+
+  .size_small {
+    width: 27vw;
+  }
+
+  .size_medium {
+    width: 41vw;
+  }
+
+  .size_large {
+    width: 61vw;
+  }
+
+  .expandedImage {
+    width: 88vw;
+    height: 82svh;
+  }
+
+  .navButton {
+    width: 2.75rem;
+    height: 2.75rem;
+
+    font-size: 1rem;
+  }
+
+  .previousButton {
+    left: 0.25rem;
+  }
+
+  .nextButton {
+    right: 0.25rem;
+  }
+}

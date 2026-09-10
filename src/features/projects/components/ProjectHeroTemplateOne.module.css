@@ -23,10 +23,6 @@
   background: var(--concrete);
 }
 
-/*
- * The image is persistent throughout the experience.
- * Scrolling only changes its crop and size.
- */
 .imageFrame {
   position: absolute;
   inset: 0 0 8%;
@@ -48,10 +44,6 @@
   object-fit: cover;
 }
 
-/*
- * This button does nothing until the scroll transition
- * has fully completed.
- */
 .slideAdvance {
   position: absolute;
   inset: 0;
@@ -71,10 +63,6 @@
   cursor: default;
 }
 
-/*
- * Title and year persist after all other identity
- * information has disappeared.
- */
 .primaryIdentity {
   position: absolute;
   top: 7%;
@@ -111,10 +99,6 @@
   white-space: nowrap;
 }
 
-/*
- * Description and metadata occupy the open area
- * of the initial L-shaped image.
- */
 .identityDetails {
   position: absolute;
   top: 30%;
@@ -184,10 +168,6 @@
   content: ",";
 }
 
-/*
- * Initial state: below the image.
- * Final state: overlaid at the top.
- */
 .callout {
   position: absolute;
   right: 0;

@@ -134,7 +134,7 @@ export default function SobremesaPage() {
       <ProjectHeroTemplateOne
         title="Sobremesa"
         year="2024–Present"
-        description="An editorial platform exploring the conversations, images, rituals and ideas that emerge when people remain together after a meal."
+        description="A print magazine focusing on the conversations, images, rituals and ideas that emerge from YEN Studios and their surrounding environment."
         disciplines={[
           "Editorial Design",
           "Art Direction",
@@ -148,7 +148,7 @@ export default function SobremesaPage() {
           "Nate Ogunbiyi",
           "YEN Studios",
         ]}
-        callout="A magazine, gathering space and ongoing study of what happens when people stay at the table."
+        callout="Sobremesa means 'upon the table', the tradition of relaxing at the table after a meal."
         heroImage={{
           src: "/images/sobremesa/hero.jpg",
           alt: "Sobremesa magazine and editorial project",
@@ -157,7 +157,7 @@ export default function SobremesaPage() {
         }}
         slides={[
           {
-            src: "/images/sobremesa/frontcover.jpg",
+            src: "/images/sobremesa/sob-iss1.jpeg",
             alt: "Sobremesa #1 Front Cover",
             caption: "Editorial design and publishing",
           },
@@ -171,7 +171,7 @@ export default function SobremesaPage() {
 
       <ProjectBodyTemplateOne
         title="Sobremesa"
-        year="2024-Present"
+        year="2023-Present"
         description="An ongoing editorial and cultural project."
         disciplines={[
           "Editorial Design",
@@ -183,7 +183,7 @@ export default function SobremesaPage() {
           "Ejiro Ogagan",
           "Nate Ogunbiyi",
         ]}
-        bodyText="Sobremesa operates as a space for conversations that continue beyond the immediate subject. Through interviews, essays, photography, games and printed matter, the publication creates an environment where ideas can overlap, contradict one another and continue evolving."
+        bodyText="Sobremesa operates as a space for conversations that continue beyond the immediate subject. Through interviews, essays, photography, art and printed matter, the publication creates an environment where ideas can overlap, contradict one another and continue evolving."
         items={sobremesaItems}
       />
     </main>

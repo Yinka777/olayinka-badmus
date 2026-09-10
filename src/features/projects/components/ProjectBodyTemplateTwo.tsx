@@ -13,6 +13,10 @@ import {
 import type { PanInfo } from "motion/react";
 import { useRef, useState } from "react";
 import styles from "./ProjectBodyTemplateTwo.module.css";
+import {
+  ProjectMuseumGallery,
+  type MuseumGalleryItem,
+} from "./ProjectMuseumGallery";
 
 const MORPH_END = 0.65;
 const RING_RADIUS = 650;
@@ -34,6 +38,7 @@ type ProjectBodyTemplateTwoProps = {
   collaborators?: string[];
   role?: string;
   media: MediaItem[];
+  gallery?: MuseumGalleryItem[];
 };
 
 type CarouselItemProps = {
@@ -165,6 +170,7 @@ export function ProjectBodyTemplateTwo({
   collaborators = [],
   role,
   media,
+  gallery = [],
 }: ProjectBodyTemplateTwoProps) {
   const carouselRef = useRef<HTMLElement>(null);
 
@@ -423,6 +429,12 @@ export function ProjectBodyTemplateTwo({
           <p>{description}</p>
         </div>
       </section>
+
+      {gallery.length > 0 && (
+        <ProjectMuseumGallery
+          images={gallery}
+        />
+      )}
     </section>
   );
 }

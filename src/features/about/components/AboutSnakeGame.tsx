@@ -756,7 +756,7 @@ export function AboutSnakeGame() {
           >
             {isTouchDevice
               ? "Tap to play"
-              : "Space to play"}
+              : "Space to play. Arrow keys/WASD to move"}
           </button>
         )}
 
