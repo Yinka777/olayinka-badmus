@@ -299,7 +299,7 @@ export const homeProjects: HomeProject[] = [
         href: "/work/galleries",
 
         image: {
-          src: "/images/home/galleries-thumb.jpg",
+          src: "/images/home/galleries-thumb.jpeg",
           alt: "Gallery Installations",
         },
 
