@@ -1,31 +1,34 @@
 import { ProjectHeroTemplateOne } from "@/features/projects/components/ProjectHeroTemplateOne";
-import { ProjectBodyTemplateOne } from "@/features/projects/components/ProjectBodyTemplateOne";
+import { ProjectBodyTemplateOne, type ProjectItem } from "@/features/projects/components/ProjectBodyTemplateOne";
 
 export default function GalleriesPage() {
   const galleriesItems = [
     {
       thumbnail: {
-        src: "/images/galleries/backcover.jpeg",
-        alt: "Sobremesa Issue 01",
+        src: "/images/galleries/cads-graphic-thumb.png",
+        alt: "CADS",
       },
 
-      caption: "Issue 01",
+      caption: "The Contemporary Arts & Design Show @ Drexel",
 
       bodyText:
-        "The first issue established Sobremesa as an editorial space for long-form conversations, visual experimentation and cultural observation.",
+        "A ",
 
-      secondaryImages: [
+      secondarySlides: [
         {
-          src: "/images/galleries/issue-01-cover.jpg",
-          alt: "Sobremesa Issue 01 cover",
-          caption: "Issue 01 cover",
+          type: "image",
+          src: "/images/galleries/cads-flyer.png",
+          alt: "CADS Schedule Flyer",
+          caption: "CADS Schedule Flyer",
         },
         {
+          type: "image",
           src: "/images/galleries/editorial-01.jpg",
           alt: "Sobremesa Issue 01 editorial spread",
           caption: "Editorial spread",
         },
         {
+          type: "image",
           src: "/images/galleries/interview-01.jpg",
           alt: "Sobremesa Issue 01 editorial spread",
           caption: "Editorial spread",
@@ -35,99 +38,37 @@ export default function GalleriesPage() {
 
     {
       thumbnail: {
-        src: "/images/galleries/backcover.jpeg",
-        alt: "Sobremesa Issue 01",
+        src: "/images/galleries/yen-gallery-thumb.png",
+        alt: "Threaded & Looped Gallery",
       },
 
-      caption: "Issue 01",
+      caption: "Threaded & Looped Gallery by YEN Studios",
 
       bodyText:
         "The first issue established Sobremesa as an editorial space for long-form conversations, visual experimentation and cultural observation.",
 
-      secondaryImages: [
+      secondarySlides: [
         {
-          src: "/images/galleries/issue-01-cover.jpg",
+          type: "image",
+          src: "/images/galleries/yen-wall1.jpg",
           alt: "Sobremesa Issue 01 cover",
           caption: "Issue 01 cover",
         },
         {
+          type: "image",
           src: "/images/galleries/editorial-01.jpg",
           alt: "Sobremesa Issue 01 editorial spread",
           caption: "Editorial spread",
         },
         {
+          type: "image",
           src: "/images/galleries/interview-01.jpg",
           alt: "Sobremesa Issue 01 editorial spread",
           caption: "Editorial spread",
         },
       ],
     },
-
-    {
-      thumbnail: {
-        src: "/images/galleries/interview-01.jpg",
-        alt: "Sobremesa interview",
-      },
-
-      caption: "Interviews",
-
-      bodyText:
-        "Interviews function as conversations rather than conventional profiles, allowing subjects to move through ideas, memory, culture and personal experience.",
-
-      secondaryImages: [
-        {
-          src: "/images/galleries/interview-01.jpg",
-          alt: "Sobremesa interview spread",
-          caption: "Interview feature",
-        },
-        {
-          src: "/images/galleries/photoshoot-01.jpg",
-          alt: "Sobremesa interview portrait",
-          caption: "Portrait from interview",
-        },
-      ],
-    },
-
-    {
-      thumbnail: {
-        src: "/images/galleries/crossword-01.jpg",
-        alt: "Sobremesa crossword",
-      },
-
-      caption: "Crosswords",
-
-      bodyText:
-        "The crossword transforms the magazine from something that is simply read into something that asks for participation.",
-
-      secondaryImages: [
-        {
-          src: "/images/galleries/crossword-01.jpg",
-          alt: "Sobremesa crossword",
-          caption: "Crossword",
-        },
-      ],
-    },
-
-    {
-      thumbnail: {
-        src: "/images/galleries/photoshoot-01.jpg",
-        alt: "Sobremesa photoshoots",
-      },
-
-      caption: "Photoshoots",
-
-      bodyText:
-        "The crossword transforms the magazine from something that is simply read into something that asks for participation.",
-
-      secondaryImages: [
-        {
-          src: "/images/galleries/crossword-01.jpg",
-          alt: "Sobremesa crossword",
-          caption: "Crossword",
-        },
-      ],
-    },
-  ];
+  ] satisfies ProjectItem[];
 
   return (
     <main>
@@ -170,10 +111,7 @@ export default function GalleriesPage() {
           "Curatorial Design",
           "Creative Direction",
         ]}
-        collaborators={[
-          "Ejiro Ogagan",
-          "Nate Ogunbiyi",
-        ]}
+        collaborators={[]}
         bodyText="Sobremesa operates as a space for conversations that continue beyond the immediate subject. Through interviews, essays, photography, art and printed matter, the publication creates an environment where ideas can overlap, contradict one another and continue evolving."
         items={galleriesItems}
       />

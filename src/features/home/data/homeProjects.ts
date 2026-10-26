@@ -152,8 +152,8 @@ export const homeProjects: HomeProject[] = [
         },
 
         position: {
-          x: -44,
-          y: -12,
+          x: -24,
+          y: -32,
         },
 
         rotation: 2,
@@ -299,13 +299,13 @@ export const homeProjects: HomeProject[] = [
         href: "/work/galleries",
 
         image: {
-          src: "/images/home/galleries-thumb.jpeg",
+          src: "/images/home/galleries-thumb.png",
           alt: "Gallery Installations",
         },
 
         position: {
-          x: 0,
-          y: -38,
+          x: 12,
+          y: -45,
         },
 
         rotation: 0,
@@ -321,7 +321,7 @@ export const homeProjects: HomeProject[] = [
 
         position: {
           x: -34,
-          y: -27,
+          y: 37,
         },
 
         rotation: -3,
